@@ -15,7 +15,7 @@
         <section class="p-2 m-5 row">
             <h1 class="text-center">Administrador productos</h1>
             <hr>
-            <form class="">
+            <form class="" id="formProducto">
                 <h5>Cargar Productos</h5>
                 <hr>
 
@@ -46,11 +46,11 @@
                 <div class="form-group">
                     <!-- Descripcion -->
                     <label for="Descripcion" class="control-label">Descripcion</label>
-                    <input type="text" class="form-control" id="Descripcion" name="Descripcion"
+                    <input type="text" class="form-control" id="descripcion" name="Descripcion"
                         placeholder="descripcion del producto"
-                        onblur=" validarCampoRequerido(this)"
+                        
                         >
-
+<!--onblur=" validarCampoRequerido(this)"-->
                     <div class="valid-feedback">Este campo es correcto</div>
                     <div class="invalid-feedback">Este campo es incorrecto</div>
                 </div>
@@ -58,11 +58,11 @@
                 <div class="form-group">
                     <!-- Cantidad -->
                     <label for="Descripcion" class="control-label">Cantidad</label>
-                    <input type="text" class="form-control" id="Cantidad" name="Cantidad"
+                    <input type="text" class="form-control" id="cantidad" name="Cantidad"
                         placeholder="ej: 5"
-                        onblur= " validarCantidad(this)"
+                        
 
-                    >
+                    ><!--onblur= " validarCantidad(this)"-->
 
                     <div class="valid-feedback">Este campo es correcto</div>
                     <div class="invalid-feedback">Este campo es incorrecto</div>
@@ -83,13 +83,16 @@
                 <div class="form-group my-3">
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="alert alert-danger d-none" role="alert" id="mensajeDeAlerta" >
+                        Debe completar todos los datos marcados
+                      </div>
                 </div>
 
             </form>
         </section>
         </main>
         <script src="js/bootstrap.min.js"></script>
-    <script src="js/validaciones.js"></script>
+    <script type="module" src="js/admin.js"></script>
 
 </body>
 
