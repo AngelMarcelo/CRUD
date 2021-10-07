@@ -1,4 +1,5 @@
-import {validarCodigo, validarCampoRequerido, validarNumeros, validarURL, validaGeneral} from "./validaciones.js"
+import {validarCodigo, validarCampoRequerido, validarNumeros, validarURL, validaGeneral} from "./validaciones.js"; 
+import {Producto} from "./productoClass.js";
 // traer los campos que me interesan (los imputs/textarea) alternativa al onblur
 let codigo = document.querySelector("#codigo");
 let cantidad = document.querySelector("#cantidad");
@@ -24,7 +25,7 @@ codigo.addEventListener("blur", () => {
   descripcion.addEventListener("blur", () => {
     validarCampoRequerido(descripcion);
   });
-  formulario.addEventListener("submit", validaGeneral);
+  formulario.addEventListener("submit", guardarProducto);
 
   function guardarProducto(e){
       e.preventDefault();
@@ -36,4 +37,10 @@ codigo.addEventListener("blur", () => {
           // aqui no hacemos nada
           console.log("no deberia hacer nada")
       }
+  }
+
+  function agregarProducto(){
+      // crear un objeto Producto
+      let productoNuevo = new Producto(codigo.value, cantidad.value, url.value, producto.value,  descripcion.value, formulario.value);
+      console.log(productoNuevo);
   }

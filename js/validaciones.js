@@ -1,28 +1,28 @@
 export function validarCampoRequerido(input) {
-  console.log("desde la funcion validar campo requerido");
+  //console.log("desde la funcion validar campo requerido");
   if (input.value.trim() != "" && input.value.trim().length > 0) {
     //if(input.value.trim() != "") alternativa de expresar..
-    console.log("el dato es correcto");
+    //console.log("el dato es correcto");
     input.className = "form-control is-valid";
     return true;
   } else {
-    console.log("corregir el dato");
+    //console.log("corregir el dato");
     input.className = "form-control is-invalid";
     return false;
   }
 }
 
 export function validarCodigo(input) {
-  console.log("desde la funcion validar campo requerido");
+ // console.log("desde la funcion validar campo requerido");
   if (input.value.trim() != "" && input.value.trim().length >= 3) {
-    console.log("el dato es correcto");
+   // console.log("el dato es correcto");
     input.className = "form-control is-valid";
     return true;
 
     //input.value.trim().length > 0) {
     //if(input.value.trim() != "") alternativa de expresar..
   } else {
-    console.log("corregir el dato");
+   //console.log("corregir el dato");
     input.className = "form-control is-invalid";
     return false;
   }
@@ -77,7 +77,7 @@ export function validaGeneral() {
     return true;
     //console.log("aqui tengo que crear el producto");
   } else {
-    console.log("corregir datos");
+    //console.log("corregir datos");
     
     // aqui mostrar el alert del html
         alerta.className = "alert alert-danger";
