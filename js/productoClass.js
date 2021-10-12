@@ -1,9 +1,9 @@
 export class Producto{
     constructor(codigoParametro, nombre, descripcion, cantidad, url){
         this.codigo = codigoParametro;
-        this.codigo = nombre;
-        this.codigo = descripcion;
-        this.codigo = cantidad;
-        this.codigo = url;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.url = url;
     }
 }

@@ -43,8 +43,8 @@ export function validarURL(input) {
   // crear una expresion regular
   let patron = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
   if (
-    patron.test(input.value.trim() != "" && patron.test(input.value.trim()))
-  ) {
+    input.value.trim() != "" && patron.test(input.value.trim()))
+  {
     input.className = "form-control is-valid";
     return true;
   } else {
@@ -67,7 +67,7 @@ export function validaGeneral() {
         validarCampoRequerido(
           descripcion) &&
             validarCampoRequerido(cantidad) &&
-            validarCampoRequerido(url)
+            validarURL(url)
            
     
         )
