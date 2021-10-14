@@ -96,9 +96,28 @@ codigo.addEventListener("blur", () => {
     <td>${itemProducto.cantidad}</td>
     <td>${itemProducto.url}</td>
     <td>
-         <button class="btn btn-warning">Editar</button>
+         <button class="btn btn-warning" onclick="prepararEdicion('${itemProducto.codigo}')">Editar</button>
          <button class="btn btn-danger">Borrar</button>
     </td>
     </tr>`
 
+  }
+
+  // window es un objeto global de js, en este caso nos sirve para llegar desde el html al js porque el scrip es modulo
+  window.prepararEdicion = function(codigoProducto){
+    // redacion alternativa
+    //window.prepararEdicion = () =>{
+      
+     console.log(codigoProducto);
+     // buscar el objeto
+     // se utiliza find para realizar un bucle que recorre el objeto
+     let productoBuscado = arregloProductos.find((itemProducto)=>{return itemProducto.codigo == codigoProducto})
+     console.log(productoBuscado);
+
+     // mostrar en el formulario
+     codigo.value = productoBuscado.codigo;
+     cantidad.value = productoBuscado.cantidad;
+     descripcion.value = productoBuscado.descripcion;
+     url.value = productoBuscado.url;
+     producto.value = productoBuscado.producto;
   }
