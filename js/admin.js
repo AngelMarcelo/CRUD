@@ -229,3 +229,7 @@ window.eliminarProducto = (codigo) => {
   });
 };
 
+window.eliminarProducto = (codigo) => {
+console.log(codigo);
+
+}
