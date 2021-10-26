@@ -46,7 +46,7 @@ function guardarProducto(e) {
     // aqui pregunto el estado de variable editarProducto
     if (editarProducto === false) {
       // tengo que crear el producto
-      // console.log("aqui creo el producto")
+      console.log("aqui creo el producto");
       agregarProducto();
     } else {
       // tengo que modificar el producto
@@ -82,6 +82,7 @@ function agregarProducto() {
   // cargar el producto nuevo en la fila de la tabla
   crearFilas(productoNuevo);
   // mostrar u mensaje al usuario de que se agrego corectamente
+  Swal.fire("Good job!", "You clicked the button!", "success");
 
   //mostrar el objeto en una tabla
 }
@@ -101,7 +102,7 @@ function limpiarFormulario() {
 }
 
 function cargaInicial() {
-  // traer los productos de localstorage si existieran, ino dejar el arreglo vacio
+  // traer los productos de localstorage si existieran, sino dejar el arreglo vacio
   arregloProductos =
     JSON.parse(localStorage.getItem("listaArregloProductos")) || [];
   // si hay productos dentro del arreglo entonces lo muestro en la tabla
@@ -123,7 +124,7 @@ function crearFilas(itemProducto) {
     <td>${itemProducto.url}</td>
     <td>
          <button class="btn btn-warning" onclick="prepararEdicion('${itemProducto.codigo}')">Editar</button>
-         <button class="btn btn-danger">Borrar</button>
+         <button class="btn btn-danger" onclick="eliminarProducto('${itemProducto.codigo}')">Borrar</button>
     </td>
     </tr>`;
 }
@@ -159,22 +160,72 @@ function actualizarProducto() {
   console.log(posicionProducto);
 
   // modificar los datos de esa posicion del arreglo
-  arregloProductos[posicionProducto].nombre = nombre.value
-  arregloProductos[posicionProducto].descripcion = descripcion.value
-  arregloProductos[posicionProducto].cantidad = cantidad.value
-  arregloProductos[posicionProducto].url = url.value
-  
+  arregloProductos[posicionProducto].nombre = producto.value;
+  arregloProductos[posicionProducto].descripcion = descripcion.value;
+  arregloProductos[posicionProducto].cantidad = cantidad.value;
+  arregloProductos[posicionProducto].url = url.value;
 
   // modificar el localstorage
- localStorage.setItem('arregloProductos', JSON.stringify(arregloProductos));
-  // volver a dibjar la tabla
-  borrarFilasTabla(listaProductos.forEach((itemProducto)=>{ crearFilas(itemProducto) })
-  )
-  
+  localStorage.setItem("arregloProductos", JSON.stringify(arregloProductos));
+  // volver a dibujar la tabla
+  borrarFilasTabla();
+  arregloProductos.forEach((itemProducto) => {
+    crearFilas(itemProducto);
+  });
+
+  // limpiar formulario
+  limpiarFormulario();
+
+  // mostrar mensaje al usuario
+  Swal.fire(
+    "Producto Modificado",
+    "Su producto se modificó correctamente",
+    "success"
+  );
 }
 
-
-function borrarFilasTabla(){
+function borrarFilasTabla() {
   let tabla = document.querySelector("#tablaProducto");
-  tabla.innerHTML += 
+  tabla.innerHTML = " ";
+}
+
+// crear funcion borrar, se utilizara un elemento global -window
+window.eliminarProducto = (codigo) => {
+  Swal.fire({
+    title: "¿Estas seguro de eliminar este producto?",
+    text: "Una vez eliminado el producto no se puede recuperar el producto",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, deseo eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // agregar el codigo que borra el producto
+      console.log(codigo);
+      //  aqui borramos el producto dentro del arreglo
+      let productoFiltrado = arregloProductos.filter((itemProducto) => {
+        return itemProducto.codigo != codigo;
+      });
+
+      console.log(productoFiltrado);
+      //actualizar el arreglo arregloProducto
+      arregloProductos = productoFiltrado;
+
+      //actualizar localStorage
+      localStorage.setItem(
+        "arregloProductos",
+        JSON.stringify(arregloProductos)
+      );
+      // dibujar nuevamente la tabla
+      borrarFilasTabla();
+      arregloProductos.forEach((itemProducto) => {
+        crearFilas(itemProducto);
+      });
+
+      Swal.fire("Producto Eliminado", "Su producto fue eliminado.", "success");
+    }
+  });
 };
+
